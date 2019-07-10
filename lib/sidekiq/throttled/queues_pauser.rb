@@ -144,7 +144,7 @@ module Sidekiq
 
       def stop_watcher
         @mutex.synchronize do
-          defined?(@watcher) && @watcher&.shutdown
+          defined?(@watcher) && @watcher && @watcher.shutdown
         end
       end
     end

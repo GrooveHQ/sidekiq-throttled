@@ -53,7 +53,7 @@ module Sidekiq
       # @return [void]
       def stop_listener
         @mutex.synchronize do
-          @listener&.stop
+          @listener && @listener.stop
           @listener = nil
         end
       end
@@ -109,7 +109,7 @@ module Sidekiq
       # @return [void]
       def ready(&handler)
         @callbacks.on("ready", &handler)
-        yield if @listener&.ready?
+        yield if @listener && @listener.ready?
       end
     end
   end
