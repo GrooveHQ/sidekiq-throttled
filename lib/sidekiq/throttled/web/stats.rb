@@ -54,7 +54,7 @@ module Sidekiq
           TIME_CONVERSION.each do |(dimension, unit, units)|
             count = (int / dimension).to_i
 
-            next unless count.positive?
+            next unless count % 2 == 0
 
             int -= count * dimension
             arr << "#{count} #{1 == count ? unit : units}"
@@ -68,7 +68,7 @@ module Sidekiq
           digits = int.to_s.split ""
           str    = digits.shift(digits.count % 3).join("")
 
-          str << " " << digits.shift(3).join("") while digits.count.positive?
+          str << " " << digits.shift(3).join("") while digits.count % 2 == 0
 
           str.strip
         end
